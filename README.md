@@ -50,3 +50,13 @@ Versión TLS
 -------------------
 
 La versión segura utilizará la librería OpenSSL con TLS. Se deberá generar un certificado X.509 "auto-firmado" para el servidor.
+
+Implementación
+-----------------------------
+
+Gran parte de las funciones estan adaptadas, fueron insparadas en o son copias textuales de los siguientes sitios:
+
+* http://www.cs.utah.edu/dept/old/texinfo/glibc-manual-0.02/library_22.html
+* http://www.paulgriffiths.net/program/c/srcs/echoclntsrc.html
+* http://www.paulgriffiths.net/program/c/srcs/echoservsrc.html
+
