@@ -22,33 +22,31 @@
 /*  Read a line from a socket  */
 
 ssize_t Readline(int sockd, void *vptr, size_t maxlen) {
-    ssize_t n, rc;
-    char    c, *buffer;
+  ssize_t n, rc;
+  char    c, *buffer;
 
-    buffer = vptr;
+  buffer = vptr;
 
-    for ( n = 1; n < maxlen; n++ ) {
+  for ( n = 1; n < maxlen; n++ ) {
 	
-	if ( (rc = read(sockd, &c, 1)) == 1 ) {
+	  if ( (rc = read(sockd, &c, 1)) == 1 ) {
+      if ( c == '\n' )
+		      break;
 	    *buffer++ = c;
-	    if ( c == '\n' )
-		break;
-	}
-	else if ( rc == 0 ) {
-	    if ( n == 1 )
-		return 0;
-	    else
-		break;
-	}
-	else {
-	    if ( errno == EINTR )
-		continue;
-	    return -1;
-	}
-    }
+	  }	else if ( rc == 0 ) {
+      if ( n == 1 )
+		    return 0;
+      else
+		    break;
+	  }	else {
+      if ( errno == EINTR )
+		    continue;
+      return -1;
+	  }
+  }
 
-    *buffer = 0;
-    return n;
+  *buffer = 0;
+  return n;
 }
 
 

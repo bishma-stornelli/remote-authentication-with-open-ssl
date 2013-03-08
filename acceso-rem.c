@@ -47,7 +47,7 @@ int main(int argc, char ** argv){
   
   /* Read authentication response */
   Readline(conn_s, buffer, MAX_LINE-1);
-  printf("%s", buffer);
+  printf("%s\n", buffer);
 
   return EXIT_SUCCESS;
 }
