@@ -2,8 +2,8 @@ CC=gcc
 
 all: insecure-client secure-client insecure-server secure-server
 
-insecure-client: acceso-rem.o options-client.o
-	$(CC) -O acceso-rem.o options-client.o -o acceso-rem
+insecure-client: acceso-rem.o options-client.o helper.o
+	$(CC) -O acceso-rem.o options-client.o helper.o -o acceso-rem
 
 secure-client: acceso-rem-seg.o options-client.o
 	$(CC) -O acceso-rem-seg.o options-client.o -o acceso-rem-seg
@@ -14,7 +14,7 @@ insecure-server: serv-acceso.o options-server.o
 secure-server: serv-acceso-seg.o options-server.o
 	$(CC) -O serv-acceso-seg.o options-server.o -o serv-acceso-seg
 	
-insecure-client.o: acceso-rem.c options-client.o
+insecure-client.o: acceso-rem.c options-client.o helper.o
 	$(CC) -O -c acceso-rem.c -o acceso-rem.o
   
 secure-client.o: acceso-rem-seg.c options-client.o
