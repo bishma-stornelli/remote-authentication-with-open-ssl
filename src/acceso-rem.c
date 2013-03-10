@@ -8,6 +8,7 @@
 
 #include "options-client.h"
 #include "helper.h"
+#include "tcp-helper.h"
 
 #define MAX_LINE 1024
 
@@ -16,10 +17,9 @@ int main(int argc, char ** argv){
   char                buffer[MAX_LINE];     /*  character buffer          */
   struct sockaddr_in  servaddr;             /*  socket address structure  */
 
+  parse_options(argc, argv, &servaddr);  
 
-  parse_options(argc, argv, &servaddr);
-  
-  
+  conn_s = tcp_connect(&servaddr);
   
   /*  Read output of server, ask input to user and write input to server */
   Readline(conn_s, buffer, MAX_LINE-1);

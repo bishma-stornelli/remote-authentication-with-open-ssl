@@ -8,10 +8,10 @@ int main () {
 	char password[MAX_LINE];
 	printf("Agregar nuevo usuario\n");
 	
-	printf("Ingrese nombre de usuario: ");
+	printf("Nombre de usuario: ");
 	scanf("%s", username);
 	
-	printf("Ingrese password: ");
+	printf("Clave: ");
 	scanf("%s", password);
 	
 	int res = guardar_usuario(username, password);

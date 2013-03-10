@@ -57,20 +57,20 @@ int main(int argc, char **argv) {
   }
   
   /*  Enter an infinite loop to respond to client requests and echo input  */
-
+  setbuf(stdout, NULL); // Disable buffering
   while ( 1 ) {
 
     /*  Wait for a connection, then accept() it  */
-
+    printf("Esperando cliente.\t");
     if ( (conn_s = accept(list_s, NULL, NULL) ) < 0 ) {
         fprintf(stderr, "Error calling accept()\n");
         exit(EXIT_FAILURE);
     }
-
+    printf("Procesando solicitud.\t");
     validate_user(conn_s);
 
     /*  Close the connected socket  */
-
+    printf("Cerrando conexion.\t");
     if ( close(conn_s) < 0 ) {
         fprintf(stderr, "ECHOSERV: Error calling close()\n");
         exit(EXIT_FAILURE);
@@ -87,18 +87,16 @@ void validate_user(int conn_s){
 	sprintf(buffer, "Nombre de usuario: \n");
 	Writeline(conn_s, buffer, strlen(buffer));
 	Readline(conn_s, username, MAX_LINE-1);
-
 	/* Ask password */
 	sprintf(buffer, "Clave: \n");
 	Writeline(conn_s, buffer, strlen(buffer));
 	Readline(conn_s, password, MAX_LINE-1);
-  
-	/* Check username and password againts file */
-		//sprintf(buffer, "Username: %s, Password: %s\n", username, password);
-		//Writeline(conn_s, buffer, strlen(buffer));
-		
+
+  printf("Esperando para retrasar ataques de fuerza bruta.\n");
+  sleep(2); /* Bye bye brute force */
+	
 	// Comparando usuario y procesando respuesta
-   	int res = comparar_usuario(username, password);
+  int res = comparar_usuario(username, password);
 	switch (res) {
 		case OK:
 			sprintf(buffer, "Usuario autorizado\n");

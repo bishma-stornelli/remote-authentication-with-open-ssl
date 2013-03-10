@@ -4,8 +4,8 @@ SRC=./src/
 
 all: insecure-client insecure-server secure-client nuevo-usuario
 
-insecure-client: $(BIN)acceso-rem.o $(BIN)options-client.o $(BIN)helper.o
-	$(CC) -o $(BIN)acceso-rem $(BIN)acceso-rem.o $(BIN)options-client.o $(BIN)helper.o
+insecure-client: $(BIN)acceso-rem.o $(BIN)options-client.o $(BIN)helper.o $(BIN)tcp-helper.o
+	$(CC) -o $(BIN)acceso-rem $(BIN)acceso-rem.o $(BIN)options-client.o $(BIN)helper.o $(BIN)tcp-helper.o
 
 insecure-server: $(BIN)serv-acceso.o $(BIN)options-server.o $(BIN)helper.o $(BIN)usuarios.o
 	$(CC) -o $(BIN)serv-acceso $(BIN)serv-acceso.o $(BIN)options-server.o $(BIN)helper.o $(BIN)usuarios.o -lssl -lcrypto
