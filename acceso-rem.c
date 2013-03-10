@@ -19,19 +19,7 @@ int main(int argc, char ** argv){
 
   parse_options(argc, argv, &servaddr);
   
-  /*  Create the listening socket  */
-
-  if ( (conn_s = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
-	  fprintf(stderr, "Error creating listening socket.\n");
-	  exit(EXIT_FAILURE);
-  }
   
-  /*  connect() to the remote echo server  */
-
-  if ( connect(conn_s, (struct sockaddr *) &servaddr, sizeof(servaddr) ) < 0 ) {
-    fprintf(stderr, "Error calling connect()\n");
-    exit(EXIT_FAILURE);
-  }
   
   /*  Read output of server, ask input to user and write input to server */
   Readline(conn_s, buffer, MAX_LINE-1);
