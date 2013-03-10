@@ -104,8 +104,7 @@ int guardar_usuario(char * nombre, char * password) {
 	
 		// Si existe, salir
 		if (!strcmp(token, nombre)) {
-			printf("hola\n");	
-			//fclose(usuarios);
+			fclose(usuarios);
 			return ERROR_NOMBRE;
 		}
 	}
