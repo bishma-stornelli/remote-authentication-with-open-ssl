@@ -21,7 +21,7 @@
 
 #include "options-server.h"   /*  parse options for servers */
 #include "helper.h"           /*  our own helper functions  */
-
+#include "usuarios.h"         /*  manejo de usuarios  */
 
 /*  Global constants  */
 
@@ -79,22 +79,40 @@ int main(int argc, char **argv) {
 }
 
 void validate_user(int conn_s){
-  char buffer[MAX_LINE];      /*  character buffer          */
-  char username[MAX_LINE];
-  char password[MAX_LINE];
-  
-  /* Ask username and password */
-  sprintf(buffer, "Nombre de usuario: \n");
+	char buffer[MAX_LINE];      /*  character buffer          */
+	char username[MAX_LINE];
+	char password[MAX_LINE];
+
+	/* Ask username and password */
+	sprintf(buffer, "Nombre de usuario: \n");
 	Writeline(conn_s, buffer, strlen(buffer));
-  Readline(conn_s, username, MAX_LINE-1);
-  
-  /* Ask password */
-  sprintf(buffer, "Clave: \n");
+	Readline(conn_s, username, MAX_LINE-1);
+
+	/* Ask password */
+	sprintf(buffer, "Clave: \n");
 	Writeline(conn_s, buffer, strlen(buffer));
-  Readline(conn_s, password, MAX_LINE-1);
+	Readline(conn_s, password, MAX_LINE-1);
   
-  /* Check username and password againts file */
-  sprintf(buffer, "Username: %s, Password: %s\n", username, password);
+	/* Check username and password againts file */
+		//sprintf(buffer, "Username: %s, Password: %s\n", username, password);
+		//Writeline(conn_s, buffer, strlen(buffer));
+		
+	// Comparando usuario y procesando respuesta
+   	int res = comparar_usuario(username, password);
+	switch (res) {
+		case OK:
+			sprintf(buffer, "Usuario autorizado\n");
+			break;
+		case ERROR_ARCHIVO:
+			sprintf(buffer, "Error del servidor en la busqueda de usuarios\n");
+			break;
+		case ERROR_NOMBRE:
+			sprintf(buffer, "Acceso denegado\n");
+			break;
+		case ERROR_PASSWORD:
+			sprintf(buffer, "Acceso denegado\n");
+			break;
+	}
+	
 	Writeline(conn_s, buffer, strlen(buffer));
 }
-
