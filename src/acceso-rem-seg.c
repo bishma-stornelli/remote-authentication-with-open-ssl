@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 
   /* Read authentication response */
   output = ssl_read(con); // ssl_read allocate memory for output
-  printf("%s", output);
+  printf("%s\n", output);
   free(output);
 
   ssl_disconnect(con);

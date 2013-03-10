@@ -13,8 +13,8 @@ insecure-server: $(BIN)serv-acceso.o $(BIN)options-server.o $(BIN)helper.o $(BIN
 secure-client: $(BIN)acceso-rem-seg.o $(BIN)options-client.o $(BIN)secure-helper.o
 	$(CC) -o $(BIN)acceso-rem-seg $(BIN)acceso-rem-seg.o $(BIN)options-client.o $(BIN)secure-helper.o $(BIN)tcp-helper.o -lssl -lcrypto
 
-secure-server: $(BIN)serv-acceso-seg.o $(BIN)options-server.o $(BIN)helper.o $(BIN)usuarios.o
-	$(CC) -o $(BIN)serv-acceso-seg $(BIN)serv-acceso-seg.o $(BIN)options-server.o $(BIN)helper.o $(BIN)usuarios.o -lssl -lcrypto	
+secure-server: $(BIN)serv-acceso-seg.o $(BIN)options-server.o $(BIN)helper.o $(BIN)usuarios.o $(BIN)tcp-helper.o $(BIN)secure-helper.o
+	$(CC) -o $(BIN)serv-acceso-seg $(BIN)serv-acceso-seg.o $(BIN)options-server.o $(BIN)helper.o $(BIN)usuarios.o $(BIN)tcp-helper.o $(BIN)secure-helper.o -lssl -lcrypto	
 	
 nuevo-usuario: $(BIN)usuarios.o $(BIN)nuevo-usuario.o
 	$(CC) -o $(BIN)nuevo-usuario $(BIN)usuarios.o $(BIN)nuevo-usuario.o -lssl -lcrypto	

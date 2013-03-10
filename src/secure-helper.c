@@ -68,33 +68,35 @@ void ssl_disconnect(Connection *c) {
   free(c);
 }
 
-// Read all available text from the Connection
+// Read a line from the Connection
 char *ssl_read(Connection *c) {
-  const int readSize = 1024;
+  const int readSize = 1;
   char *rc = NULL;
   int received, count = 0;
   char buffer[1024];
 
   if (c) {
       while (1) {
-          if (!rc)
+          if (!rc){
             rc = malloc(readSize * sizeof(char) + 1);
-          else
+            rc[0] = '\0';
+          } else {
             rc = realloc(rc, (count + 1) * readSize * sizeof(char) + 1);
+          }
 
           received = SSL_read(c->sslHandle, buffer, readSize);
-          buffer[received] = '\0';
 
+          if (buffer[0] == '\n' || received < readSize){
+            break;
+          }
+
+          buffer[received] = '\0';
           if (received > 0)
             strcat(rc, buffer);
-
-          if (received < readSize)
-            break;
 
           ++count;
       }
   }
-
   return rc;
 }
 
