@@ -59,4 +59,5 @@ Gran parte de las funciones estan adaptadas, fueron insparadas en o son copias t
 * http://www.cs.utah.edu/dept/old/texinfo/glibc-manual-0.02/library_22.html
 * http://www.paulgriffiths.net/program/c/srcs/echoclntsrc.html
 * http://www.paulgriffiths.net/program/c/srcs/echoservsrc.html
+* http://savetheions.com/2010/01/16/quickly-using-openssl-in-c/
 
