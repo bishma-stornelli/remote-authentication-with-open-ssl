@@ -14,5 +14,5 @@ $(BIN)%.o: $(SRC)%.c
 	$(CC) -c $< -o $@
 	
 clean:
-	rm -f $(BIN)*
+	rm -f $(BIN)*.o $(BIN)serv-acceso $(BIN)acceso-rem
 	clear 
