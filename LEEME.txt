@@ -1,0 +1,52 @@
+El código del proyecto consiste de las siguientes carpetas y archivos:
+
+  * bin: Carpeta para guardar los archivos compilados
+  * src: Carpeta para guardar el código fuente del proyecto:
+    * acceso-rem.c: Implementación del cliente inseguro
+    * acceso-rem-seg.c: Implementación del cliente seguro
+    * helper.c y helper.h: Funciones para leer y escribir por sockets TCP.
+    * nuevo-usuario.c: Implementación de programa para registrar nuevos usuarios.
+    * options-client.c y options-client.h: Funciones para procesar los argumentos dados
+        por la línea de comando al ejecutar los clientes.
+    * options-server.c y options-server.h: Funciones para procesar los argumentos dados
+        por la línea de comando al ejecutar los servidores.
+    * secure-helper.c y secure-helper.h: Funciones para conectarse, desconectarse,
+        leer y escribir en conexiones seguras usando SSL 2 o 3.
+    * serv-acceso.c: Implementación del servidor inseguro.
+    * serv-acceso-seg.c: Implementación del servidor inseguro.
+    * tcp-helper.c y tcp-helper.h: Funciones para conectarse y escuchar en conexiones TCP.
+    * usuarios.c y usuarios.h: Funciones para procesar usuarios (guardar y comparar).
+  * Makefile: Makefile para compilar el código fuente
+  * certificado.sh: Shell script para crear el certificado X.509 (debe existir una carpeta llamada certificate)
+  * certificate: Carpeta para almacenar el certificado X.509
+  * LEEME.txt: Este archivo.
+  
+Para compilar el código se provee un Makefile que puede ser ejecutado con los siguientes argumentos:
+
+  * Sin argumentos: Compila los dos clientes, los dos servidores y el programa nuevo-usuario.
+  * insecure-client: Compila solo el cliente inseguro.
+  * insecure-server: Compila solo el servidor inseguro.
+  * secure-client: Compila solo el cliente seguro.
+  * secure-server: Compila solo el servidor inseguro.
+  * nuevo-usuario: Compila solo el programa nuevo-usuario.
+  * clean: Borra todos los ejecutables y los archivos .o del directorio bin
+  
+Todos los archivos compilados se almacenan en una carpeta bin que debe estar creada
+para que el Makefile funcione correctamente.
+
+El certificado X.509 se genera ejecutando el script certificado.sh. No hace falta
+proporcionar parámetros al ejecutar el script pero se debe asegurar que exista el
+directorio certificate antes de ejecutarlo.
+
+Para ejecutar los programas, se debe posicionar en la carpeta bin pues el servidor
+seguro espera que el certificado se encuentra en el directorio ../certificate y que
+el archivo de usuarios se encuentre en el directorio .
+
+El almacen de usuarios y claves se hacen en un archivo usuarios.txt en donde se 
+guarda la siguiente información para cada usuario:
+
+  <nombre de usuario> - <clave del usuario cifrada con AES 256>
+  
+La clave usada para cifrar forma parte del código del programa.
+
+

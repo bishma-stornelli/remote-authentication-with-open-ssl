@@ -26,5 +26,5 @@ $(BIN)%.o: $(SRC)%.c
 	$(CC) -c $< -o $@
 	
 clean:
-	rm -f $(BIN)*.o $(BIN)serv-acceso $(BIN)acceso-rem $(BING)acceso-rem-seg
+	rm -rf $(BIN)*.o $(BIN)serv-acceso $(BIN)acceso-rem $(BIN)acceso-rem-seg $(BIN)serv-acceso-seg $(BIN)nuevo-usuario
 	clear 
